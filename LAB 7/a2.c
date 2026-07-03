@@ -77,13 +77,14 @@ struct node *deletelast(struct node *FIRST){
     }
     
     else{
-        struct node *save=FIRST;
-        while ((save->link->link)!=NULL)
+        struct node *save=FIRST,*prev=NULL;
+        while ((save->link)!=NULL)
         {
+            prev=save;
             save=save->link;
         }
-        free(save->link);
-        save->link=NULL;
+        prev->link=save->link;
+        free(save);
         return FIRST;
     }
 }
@@ -141,7 +142,7 @@ void main()
     FIRST = insert(8, FIRST);
     FIRST = insertatend(9,FIRST);
     display(FIRST);
-    FIRST= deletefromspecifiedposition(FIRST,2);
+    // FIRST= deletefromspecifiedposition(FIRST,2);
     // printf("Inserted Element Are :- \n");
     // display(FIRST);
     // printf("Deleted Node :- ");
@@ -152,9 +153,11 @@ void main()
     // display(FIRST);
     // printf("After Insertion At End:-\n");
     // display(FIRST);
-    // printf("After Deletion At End :- \n");
-    // display(FIRST);
-    printf("After Deletion from pos 2 :- \n");
+    
+    printf("After Deletion At End :- \n");
+    FIRST=deletelast(FIRST);
     display(FIRST);
+    // printf("After Deletion from pos 2 :- \n");
+    // display(FIRST);
 
 }
