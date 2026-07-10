@@ -23,7 +23,7 @@ struct node *copyll(struct node *first)
     while (temp != NULL)
     {
         copied = (struct node *)malloc(sizeof(struct node));
-        struct node *temp1 = NULL;
+       
         copied->info = temp->info;
         copied->link = NULL;
         if (copy == NULL)

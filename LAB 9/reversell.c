@@ -1,60 +1,56 @@
-#include <stdio.h>
-#include <stdlib.h>
-struct node
-{
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
     int info;
-    struct node *link;
+    struct node * link;
 };
-struct node *insertion(struct node *first, int x)
-{
-    struct node *new;
-    new = (struct node *)malloc(sizeof(struct node));
-    if (new == NULL)
+struct node * insertion (struct node * first,int x){
+    struct node * new;
+    new=(struct node *)malloc(sizeof(struct node));
+    if (new==NULL)
     {
-        printf("Memory Allocation Failed!.");
+        printf("Memory Allocation Failed..!");
     }
-    new->info = x;
-    new->link = first;
-    first = new;
+    else{
+        new->info=x;
+        new->link=first;
+        first=new;
+    }
     return first;
 }
-struct node *reversell(struct node *first)
-{
-    struct node *newnode = NULL;
-    struct node *reversed = NULL;
-    struct node *temp = first;
-    while (temp != NULL)
+struct node * reversell(struct node * first){
+    struct node * temp=first;
+    struct node * next=NULL;
+    struct node * prev=NULL;
+    while (temp!=NULL)
     {
-        newnode = (struct node *)malloc(sizeof(struct node));
-        newnode->info = temp->info;
-        newnode->link = reversed;
-        reversed = newnode;
-        temp = temp->link;
+       next=temp->link;
+       temp->link=prev;
+       prev=temp;
+       temp=next;
     }
-    return reversed;
+    first=prev;
+    return first;
 }
-
-void display(struct node *reversed)
-{
-    struct node *temp = reversed;
-    while (temp != NULL)
+void display(struct node * first){
+    struct node * temp=first;
+    while (temp!=NULL)
     {
-        printf("%d -> ", temp->info);
-        temp = temp->link;
+        printf("%d -> ",temp->info);
+        temp=temp->link;
     }
     printf("NULL\n");
 }
-void main()
-{
-    struct node *first = NULL;
-
-    first = insertion(first, 5);
-    first = insertion(first, 4);
-    first = insertion(first, 3);
-    first = insertion(first, 2);
-    struct node *reverse = reversell(first);
+void main(){
+    struct node * first = NULL;
+    struct node * reverse=NULL;
+    first=insertion(first,1);
+    first=insertion(first,2);
+    first=insertion(first,3);
+    first=insertion(first,4);
     printf("Linked List :- \n");
     display(first);
-    printf("Reversed Linked List :- \n");
+    reverse=reversell(first);
     display(reverse);
+
 }
