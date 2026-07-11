@@ -28,7 +28,7 @@ struct node * swap(struct node * first,int k){
         ltemp=ltemp->link;
     }
     if (temp==NULL || temp->link==NULL || ltemp==NULL || ltemp->link==NULL){
-        printf("Position Cant be determined from  first as well as last.!");
+        printf("Position Cant be determined from  first or last.!");
     }
     int x=temp->info;
     temp->info=ltemp->info;
