@@ -4,6 +4,26 @@ struct node{
     int info;
     struct node * link;
 };
+int gcd(int a,int b){
+    int gcd;
+    int min;
+    if (a>b)
+    {
+        min=a;
+    }
+    else{
+       min=a;
+    }
+    for ( int i = min; i>=1; i--)
+    {
+        if (a%i==0 && b%i==0)
+        {
+            return i;
+        }
+        
+    }
+    return 1;
+}
 struct node * insertion(struct node * first,int x){
     struct node * new=(struct node *)malloc(sizeof(struct node));
     if (new==NULL)
@@ -15,24 +35,21 @@ struct node * insertion(struct node * first,int x){
     first=new;
     return first;
 }
-struct node * swap(struct node * first,int k){
+struct node * addingcd(struct node * first){
     struct node * temp=first;
-    struct node * ltemp=first;
-    struct node * save=NULL;
-    int i=0;
-    for(i=1 ; i < k && temp!=NULL;i++){
-        temp=temp->link;
-    }
-    for (i= 0; i < 5-k+1 && ltemp!=NULL; i++)
+    struct node * new;
+    
+    while (temp->link!=NULL)
     {
-        ltemp=ltemp->link;
+        new=(struct node *)malloc(sizeof(struct node));
+        int g=gcd(temp->info,temp->link->info);
+        new->info=g;
+        new->link=temp->link;
+        temp->link=new;
+        
+       
+        temp=temp->link->link;
     }
-    if (temp==NULL || temp->link==NULL || ltemp==NULL || ltemp->link==NULL){
-        printf("Position Cant be determined from  first or last.!");
-    }
-    int x=temp->info;
-    temp->info=ltemp->info;
-    ltemp->info=x;
     return first;
 }
 void display(struct node * first){
@@ -44,9 +61,12 @@ void display(struct node * first){
     }
     printf("NULL\n");
 }
+
 void main(){
     struct node * first=NULL;
-    struct node * swapped=NULL;
+   
+   struct node * gcdadded=NULL;
+    
     first=insertion(first,4);
     first=insertion(first,6);
     first=insertion(first,7);
@@ -55,7 +75,7 @@ void main(){
     first=insertion(first,5);
     printf("Linked List :- \n");
     display(first);
-    swapped=swap(first,2);
-    printf("List After Swapping :- \n");
-    display(swapped);
+    gcdadded=addingcd(first);
+    display(gcdadded);
+
 }
