@@ -15,7 +15,7 @@ void push(char c){
 char pop(){
     if(top==-1){
         printf("Stack Underflow..");
-        return '0';
+        return '\0';
     }
     else{
         top=top-1;
